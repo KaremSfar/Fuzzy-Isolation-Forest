@@ -57,6 +57,7 @@ class ICustomIForest:
     self.forest: List[Node] = None
     self.contamination = contamination
     self.threshold = None
+    self.scores = None
 
   # inner class node
   # class Node:
@@ -69,6 +70,7 @@ class ICustomIForest:
 
   def fit(self,set):
     self.forest = self._iForest(set)
+    self.scores = None
     return self.forest
 
   def _generate_threshold(self,scores):
@@ -181,6 +183,7 @@ class AlphaCutIForestModel(ICustomIForest):
   def score_samples(self,test_set):
     if not(self.forest):
       return Null
+    if (self.scores != None) return self.scores
     scores=[]
     forest_size=len(self.forest)
     for i in range(test_set.shape[0]):
@@ -190,6 +193,7 @@ class AlphaCutIForestModel(ICustomIForest):
         s += AlphaCutIForestModel._path_length(instance,self.forest[j],0)
       score = AlphaCutIForestModel._anomalie_score(s/forest_size,forest_size)
       scores.append(score)
+    self.scores = np.array(scores)
     return np.array(scores)
 
 
