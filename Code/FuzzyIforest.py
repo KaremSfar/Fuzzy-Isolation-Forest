@@ -183,7 +183,8 @@ class AlphaCutIForestModel(ICustomIForest):
   def score_samples(self,test_set):
     if not(self.forest):
       return Null
-    if (self.scores != None) return self.scores
+    if (self.scores != None):
+       return self.scores
     scores=[]
     forest_size=len(self.forest)
     for i in range(test_set.shape[0]):
