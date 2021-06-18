@@ -57,7 +57,7 @@ class ICustomIForest:
     self.forest: List[Node] = None
     self.contamination = contamination
     self.threshold = None
-    self.scores = None
+    self.scores = np.array([])
 
   # inner class node
   # class Node:
@@ -120,7 +120,11 @@ class ICustomIForest:
     
   def predict(self, test_set) :
     predictions = [] 
-    scores = self.score_samples(test_set)
+    scores = []
+    if (self.scores.any()):
+      scores = self.scores
+    else: 
+      scores = self.score_samples(test_set)
     self._generate_threshold(scores)
     for score in scores:
       predicted_class = 0 if ( score <= self.threshold ) else 1
@@ -182,9 +186,7 @@ class AlphaCutIForestModel(ICustomIForest):
 
   def score_samples(self,test_set):
     if not(self.forest):
-      return Null
-    if (self.scores != None):
-       return self.scores
+      return None
     scores=[]
     forest_size=len(self.forest)
     for i in range(test_set.shape[0]):
