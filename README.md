@@ -75,6 +75,13 @@ The problem in fuzzifying crisp data being the construction of pertinent members
   <img width="400" src="readme-assets/popular-membership-functions.png"/>
 </p>
 
+---
+For more information, check this Colab notebook:
+
+[SciKit Fuzzy On real Hand Exemple](https://colab.research.google.com/drive/1YDYMFvdT8H0LAung-hizTi32yNQUZmcN)
+
+---
+
 ## Fuzzy Isolation Forest With Alpha cuts
 We recall that the fundamental principle of fuzzy subsets is that an
 entity x of the universe of the variable is no longer evaluated if it belongs to a set or no, but rather to the degree to which it belongs to the said set.
